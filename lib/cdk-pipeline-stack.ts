@@ -21,7 +21,7 @@ export class CdkPipelineStack extends Stack {
       pipelineName: 'MyPipeline',
       synth: new ShellStep('Synth', {
         input: CodePipelineSource.gitHub(repo, 'master'),
-        commands: ['npm ci', 'npm run build', 'npm run cy-test', 'npx cdk synth'],
+        commands: ['npm ci', 'npm run build', 'npx cdk synth'],
         env: {
           "CYPRESS_USERNAME": cypressUsername,
           "CYPRESS_USER_PASSWORD": cypressUserPassword
