@@ -1,6 +1,6 @@
 import { Stack, StackProps } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
-import { CodePipeline, CodePipelineSource, ShellStep } from 'aws-cdk-lib/pipelines';
+import { CodeBuildStep, CodePipeline, CodePipelineSource, ShellStep } from 'aws-cdk-lib/pipelines';
 import { CdkPipelineStage } from './cdk-pipeline-stage';
 import * as ssm from 'aws-cdk-lib/aws-ssm';
 // import * as sqs from 'aws-cdk-lib/aws-sqs';
@@ -33,7 +33,7 @@ export class CdkPipelineStack extends Stack {
     const deployStage = pipeline.addStage(deploy);
 
     deployStage.addPost(
-      new ShellStep('Post-Deployment-Validation', {
+      new CodeBuildStep('Post-Deployment-Validation', {
         input: CodePipelineSource.gitHub(repo, 'master'),
         env: {
           "CYPRESS_USERNAME": cypressUsername,
