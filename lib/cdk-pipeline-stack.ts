@@ -30,7 +30,17 @@ export class CdkPipelineStack extends Stack {
     });
 
     const deploy = new CdkPipelineStage(this, 'Deploy');
-    const deployStage = pipeline.addStage(deploy);
+    const stage = pipeline.addStage(deploy);
+
+    stage.addPost(new CodeBuildStep('Test', {
+      input: CodePipelineSource.gitHub(repo, 'master'),
+      env: {
+        "CYPRESS_USERNAME": cypressUsername,
+        "CYPRESS_USER_PASSWORD": cypressUserPassword
+      },
+      commands: ['npm ci', 'npm run build', 'npm run cy-test']
+    }
+    ));
 
     /*
     deployStage.addPost(
