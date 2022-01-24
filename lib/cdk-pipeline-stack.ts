@@ -32,12 +32,12 @@ export class CdkPipelineStack extends Stack {
     const deploy = new CdkPipelineStage(this, 'Deploy');
     const stage = pipeline.addStage(deploy);
 
-    stage.addPost(new CodeBuildStep('Test', {
+    stage.addPost(new ShellStep('Test', {
       env: {
         "CYPRESS_USERNAME": cypressUsername,
         "CYPRESS_USER_PASSWORD": cypressUserPassword
       },
-      commands: ['npm ci', 'npm run build', 'npm run cy-test']
+      commands: ['npm ci', 'npm run cy-test'],
     }
     ));
 
