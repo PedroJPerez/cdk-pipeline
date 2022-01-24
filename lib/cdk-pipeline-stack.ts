@@ -13,8 +13,8 @@ export class CdkPipelineStack extends Stack {
       this, 'cypressUsername');
 
     const cypressUserPassword = ssm.StringParameter.valueForStringParameter(
-        this, 'cypressUserPassword');
-   
+      this, 'cypressUserPassword');
+
 
     const repo = 'PedroJPerez/cdk-pipeline';
     const pipeline = new CodePipeline(this, 'Pipeline', {
@@ -26,10 +26,21 @@ export class CdkPipelineStack extends Stack {
           "CYPRESS_USERNAME": cypressUsername,
           "CYPRESS_USER_PASSWORD": cypressUserPassword
         }
-    })
-  });
+      })
+    });
 
-  const deploy = new CdkPipelineStage(this, 'Deploy');
-  const deployStage = pipeline.addStage(deploy);
+    const deploy = new CdkPipelineStage(this, 'Deploy');
+    const deployStage = pipeline.addStage(deploy);
+
+    deployStage.addPost(
+      new ShellStep('Post-Deployment-Validation', {
+        input: CodePipelineSource.gitHub(repo, 'master'),
+        env: {
+          "CYPRESS_USERNAME": cypressUsername,
+          "CYPRESS_USER_PASSWORD": cypressUserPassword
+        },
+        commands: ['npm ci', 'npm run build', 'npm run cy-test']
+      })
+    );
   }
 }
