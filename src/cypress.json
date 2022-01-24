@@ -1,0 +1,13 @@
+{
+    "baseUrl": "https://app.carbonani.com",
+    "env":{
+        "USERNAME":"",
+        "USER_PASSWORD":""
+    },
+    "video":false,
+    "defaultCommandTimeout": 8000,
+    "requestTimeout": 8000,
+    "retries": 2,
+    "viewportWidth": 1500,
+    "viewportHeight": 800
+}
