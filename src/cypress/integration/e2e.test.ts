@@ -18,7 +18,7 @@ describe("Smoke Test", function () {
     cy.location("pathname").should("equal", "/dashboard/app");
   });
 
-  it.only("yodlee connection loads", function () {
+  it("yodlee connection loads", function () {
     cy.visit("/");
     cy.get('[name="email"]').type(Cypress.env('USERNAME'));
     cy.get('[name="password"]').type(Cypress.env('USER_PASSWORD'));
