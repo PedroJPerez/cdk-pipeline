@@ -1,13 +1,22 @@
 {
     "baseUrl": "https://app.carbonani.com",
-    "env":{
-        "USERNAME":"",
-        "USER_PASSWORD":""
+    "env": {
+        "USERNAME": "",
+        "USER_PASSWORD": ""
     },
-    "video":false,
+    "reporter": "junit",
+    "reporterOptions": {
+      "mochaFile": "cypress/reports/test-results-[hash].xml",
+      "testsuitesTitle": "Cypress Tests",
+      "testCaseSwitchClassnameAndName": true,
+      "properties":{
+          "BROWSER": "Chrome"
+      }
+    },
+    "video": false,
     "defaultCommandTimeout": 8000,
     "requestTimeout": 8000,
-    "retries": 2,
+    "retries": 0,
     "viewportWidth": 1500,
     "viewportHeight": 800
 }
