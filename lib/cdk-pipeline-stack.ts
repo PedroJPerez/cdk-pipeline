@@ -54,6 +54,8 @@ export class CdkPipelineStack extends Stack {
       })});
 
     stage.addPost(postValidation);
+
+    pipeline.buildPipeline();
     reportGroup.grantWrite(postValidation);
   }
 }
