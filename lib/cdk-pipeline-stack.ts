@@ -41,12 +41,12 @@ export class CdkPipelineStack extends Stack {
         "CYPRESS_USERNAME": cypressUsername,
         "CYPRESS_USER_PASSWORD": cypressUserPassword
       },
-      commands: ['npm ci', 'npm run delete-reports', 'npm run cypress', 'combine-reports'],
+      commands: ['npm ci', 'npm run delete-reports', 'npm run cypress'],
       partialBuildSpec: BuildSpec.fromObject({
         version: '0.2',
         reports: {
           [reportGroup.reportGroupArn]: {
-            files: 'cypress-report.xml',
+            files: '*.xml',
             'file-format': 'JUNITXML',
             'base-directory': 'src/cypress/reports'
           }
