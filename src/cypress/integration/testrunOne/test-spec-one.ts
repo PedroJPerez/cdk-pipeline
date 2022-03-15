@@ -16,5 +16,6 @@ describe("Spec 1", function () {
       cy.get('[name="password"]').type(Cypress.env('USER_PASSWORD'));
       cy.get('[type="submit"]').click();
       cy.location("pathname").should("equal", "/dashboard/app");
+      cy.log('Test new change');
     });
   });
