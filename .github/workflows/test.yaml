@@ -28,7 +28,8 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    - run: npm ci
+    - name: Install 
+      run: npm ci
     - name: Execute E2E
       uses: cypress-io/github-action@v2
       with:
