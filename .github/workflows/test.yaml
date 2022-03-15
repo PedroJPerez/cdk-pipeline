@@ -35,4 +35,4 @@ jobs:
         uses: tj-actions/changed-files@v18.1
       - name: Execute Test when a file changes
         if: contains(steps.changed-files.outputs.all_changed_and_modified_files, 'test-spec-one.ts')
-        run: npx cypress run --browser chrome --spec "src/cypress/integration/testrunOne"
+        run: cd src && npx cypress run --browser chrome --spec "src/cypress/integration/testrunOne"
