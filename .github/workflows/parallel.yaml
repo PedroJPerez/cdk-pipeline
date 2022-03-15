@@ -28,6 +28,5 @@ jobs:
       - name: Cypress Test
         uses: cypress-io/github-action@v2
         with:
-          spec: cypress/integration/${{ matrix.containers }}/**
-          working-directory: src
+          spec: src/cypress/integration/${{ matrix.containers }}/**
           browser: chrome
