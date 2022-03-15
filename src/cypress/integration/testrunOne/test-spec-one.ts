@@ -10,7 +10,7 @@ describe("Spec 1", function () {
       cy.location("pathname").should("equal", "/login");
     });
     
-    it("user is able to login", function () {
+    it("user is able to login and", function () {
       cy.visit("/");
       cy.get('[name="email"]').type(Cypress.env('USERNAME'));
       cy.get('[name="password"]').type(Cypress.env('USER_PASSWORD'));

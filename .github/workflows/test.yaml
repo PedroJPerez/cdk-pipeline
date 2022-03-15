@@ -30,9 +30,9 @@ jobs:
           cache: 'npm'
       - name: Install 
         run: npm ci
-      - name: Execute E2E
-        uses: cypress-io/github-action@v2
-        with:
-          install: false
-          working-directory: src
-          browser: chrome
+      - name: Check modified files
+        id: changed-files
+        uses: tj-actions/changed-files@v18.1
+      - name: Execute Test when a file changes
+        if: contains(steps.changed-files.outputs.modified_files, 'src/cypress/integration/testrunOne/*')
+        run: npx cypress run --browser chrome --spec "src/cypress/integration/testrunOne"
