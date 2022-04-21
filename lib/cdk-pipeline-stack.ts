@@ -1,14 +1,26 @@
-import { Stack, StackProps } from 'aws-cdk-lib';
+import { Stack, StackProps, pipelines } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 import { CodeBuildStep, CodePipeline, CodePipelineSource, ShellStep } from 'aws-cdk-lib/pipelines';
 import { CdkPipelineStage } from './cdk-pipeline-stage';
 import * as ssm from 'aws-cdk-lib/aws-ssm';
-import { BuildSpec, ReportGroup } from 'aws-cdk-lib/aws-codebuild';
+import { BuildSpec, ReportGroup, BuildEnvironmentVariableType } from 'aws-cdk-lib/aws-codebuild';
 // import * as sqs from 'aws-cdk-lib/aws-sqs';
 
 export class CdkPipelineStack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props);
+
+    const githubConnectionArn = ssm.StringParameter.fromStringParameterAttributes(this, 'GetCodestarGithubConnectionArnFromSSM', {
+      parameterName: 'gitHubConnection',
+    }).stringValue;
+
+    const repo = 'PedroJPerez/cdk-pipeline';
+
+    const cypressSM = "cypress/userPassword";
+
+    const gitHubConnection = pipelines.CodePipelineSource.connection(repo, "master", {
+      connectionArn: githubConnectionArn,
+    });
 
     const cypressUsername = ssm.StringParameter.valueForStringParameter(
       this, 'cypressUsername');
@@ -20,11 +32,11 @@ export class CdkPipelineStack extends Stack {
       reportGroupName: 'SmokeTest'
     });
 
-    const repo = 'PedroJPerez/cdk-pipeline';
+    
     const pipeline = new CodePipeline(this, 'Pipeline', {
       pipelineName: 'MyPipeline',
       synth: new ShellStep('Synth', {
-        input: CodePipelineSource.gitHub(repo, 'master'),
+        input: gitHubConnection,
         commands: ['npm ci', 'npm run build', 'npx cdk synth'],
         env: {
           "CYPRESS_USERNAME": cypressUsername,
@@ -37,9 +49,16 @@ export class CdkPipelineStack extends Stack {
     const stage = pipeline.addStage(deploy);
 
     const postValidation = new CodeBuildStep('Test', {
+      buildEnvironment:{
+        environmentVariables:{
+          CYPRESS_USER_PASSWORD:{
+            type: BuildEnvironmentVariableType.SECRETS_MANAGER,
+            value: cypressSM,
+          }
+        }
+      },
       env: {
-        "CYPRESS_USERNAME": cypressUsername,
-        "CYPRESS_USER_PASSWORD": cypressUserPassword
+        CYPRESS_USERNAME: cypressUsername,
       },
       commands: ['npm ci', 'npm run delete-reports', 'npm run cypress'],
       partialBuildSpec: BuildSpec.fromObject({
