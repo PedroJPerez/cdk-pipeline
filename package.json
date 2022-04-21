@@ -9,7 +9,7 @@
     "watch": "tsc -w",
     "test": "jest",
     "cdk": "cdk",
-    "cypress": "cd src && npx cypress run --browser chrome --spec 'cypress/integration/*.test.ts'",
+    "cypress": "npx cypress run --browser chrome --spec 'cypress/integration/*.test.ts'",
     "delete-reports": "rm src/cypress/reports/* || true",
     "combine-reports": "jrm src/cypress/reports/cypress-report.xml \"src/cypress/reports/*.xml\""
   },
