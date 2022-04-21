@@ -67,7 +67,7 @@ export class CdkPipelineStack extends Stack {
           [reportGroup.reportGroupArn]: {
             files: '*.xml',
             'file-format': 'JUNITXML',
-            'base-directory': 'src/cypress/reports'
+            'base-directory': 'cypress/reports'
           }
         }
       })});
