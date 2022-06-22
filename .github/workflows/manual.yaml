@@ -1,0 +1,35 @@
+# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
+name: E2E Tests
+
+on:
+  workflow_dispatch:
+    inputs:
+      specFilePath:
+env:
+  CYPRESS_USERNAME: ${{secrets.CYPRESS_USERNAME}}
+  CYPRESS_USER_PASSWORD: ${{secrets.CYPRESS_USER_PASSWORD}}
+
+jobs:
+  cypress-run:
+
+    runs-on: ubuntu-latest 
+
+    strategy:
+      matrix:
+        node-version: [16.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+    name: E2E on Chrome
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+      - name: Install 
+        run: npm ci
+      - name: Execute Test File
+        run: cd src && npx cypress run --browser chrome --spec ${{specFilePath}}
