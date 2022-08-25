@@ -1,6 +1,7 @@
 /// <reference types="cypress" />
 
 describe("Spec 1", function () {
+  if(Cypress.env('login')){
     beforeEach(function () {
   
     });
@@ -18,4 +19,5 @@ describe("Spec 1", function () {
       cy.location("pathname").should("equal", "/dashboard/app");
       cy.log('Test new change');
     });
+  }
   });
