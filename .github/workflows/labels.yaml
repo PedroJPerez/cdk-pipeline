@@ -38,5 +38,5 @@ jobs:
         uses: cypress-io/github-action@v4
         with: 
           browser: chrome
-          spec: cypress/integration/test**
+          spec: cypress/integration/**
 
