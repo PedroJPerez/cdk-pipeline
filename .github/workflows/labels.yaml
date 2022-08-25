@@ -34,7 +34,7 @@ jobs:
         uses: PedroJPerez/my-actions/move-test-plan@v1.202
       - name: Execute Cypress
         uses: cypress-io/github-action@v4
-          with: 
-            browser: chrome
-            spec: cypress/integration/test**
+        with: 
+          browser: chrome
+          spec: cypress/integration/test**
 
