@@ -9,6 +9,7 @@ on:
 env:
   CYPRESS_USERNAME: ${{secrets.CYPRESS_USERNAME}}
   CYPRESS_USER_PASSWORD: ${{secrets.CYPRESS_USER_PASSWORD}}
+  CYPRESS_LOGIN: true
 
 jobs:
   cypress-run:
