@@ -34,6 +34,8 @@ jobs:
         uses: PedroJPerez/my-actions/move-test-plan@v1.202
         with:
           githubToken: ${{ secrets.GITHUB_TOKEN }}
+      - name: Echo Login
+        run: echo $LOGIN
       - name: Execute Cypress
         uses: cypress-io/github-action@v4
         with: 
