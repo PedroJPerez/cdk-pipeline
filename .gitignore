@@ -9,3 +9,4 @@ reports
 .cdk.staging
 cdk.out
 !cypress/support/*.js
+!cypress/plugins/*.js
