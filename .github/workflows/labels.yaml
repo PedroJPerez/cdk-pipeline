@@ -36,6 +36,10 @@ jobs:
           githubToken: ${{ secrets.GITHUB_TOKEN }}
       - name: Echo Login
         run: echo $LOGIN
+      - name: Echo Contact Card
+        run: echo $CONTACT_CARD
+      - name: Echo Contact
+        run: echo $CONTACT CARD
       - name: Execute Cypress
         uses: cypress-io/github-action@v4
         with: 
