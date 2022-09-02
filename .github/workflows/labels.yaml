@@ -38,6 +38,8 @@ jobs:
         run: echo $LOGIN
       - name: Echo Contact Card
         run: echo $CONTACT_CARD
+      - name: Echo Register
+        run: echo $REGISTER
       - name: Execute Cypress
         uses: cypress-io/github-action@v4
         with: 
