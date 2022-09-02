@@ -1,6 +1,7 @@
 /// <reference types="cypress" />
 
 describe("Spec 3", function () {
+  if(Cypress.env('estate')){
     beforeEach(function () {
   
     });
@@ -17,5 +18,5 @@ describe("Spec 3", function () {
       cy.get('[type="submit"]').click();
       cy.location("pathname").should("equal", "/dashboard/app");
     });
-  
+  }
   });
