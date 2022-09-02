@@ -31,13 +31,13 @@ jobs:
       - name: Install 
         run: npm ci
       - name: Export PR Labels
-        uses: PedroJPerez/my-actions/move-test-plan@v1.208
+        uses: PedroJPerez/my-actions/move-test-plan@v1.22
         with:
           githubToken: ${{ secrets.GITHUB_TOKEN }}
       - name: Echo Login
         run: echo $LOGIN
       - name: Echo Contact Card
-        run: echo "$CONTACT CARD"
+        run: echo "$CONTACT_CARD"
       - name: Execute Cypress
         uses: cypress-io/github-action@v4
         with: 
