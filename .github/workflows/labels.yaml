@@ -31,7 +31,7 @@ jobs:
       - name: Install 
         run: npm ci
       - name: Export PR Labels
-        uses: PedroJPerez/my-actions/move-test-plan@v1.207
+        uses: PedroJPerez/my-actions/move-test-plan@v1.208
         with:
           githubToken: ${{ secrets.GITHUB_TOKEN }}
       - name: Echo Login
