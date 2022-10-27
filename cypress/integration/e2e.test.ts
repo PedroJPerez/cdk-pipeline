@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-describe("Smoke Test", function () {
+describe.skip("Smoke Test", function () {
   beforeEach(function () {
 
   });
