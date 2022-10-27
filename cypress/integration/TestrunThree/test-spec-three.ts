@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-describe("Spec 3", function () {
+describe.skip("Spec 3", function () {
   if(Cypress.env('estate')){
     beforeEach(function () {
   
