@@ -39,7 +39,8 @@ jobs:
       - name: Echo Contact Card
         run: echo $CONTACT_CARD
       - name: Verify Cypress
-        run: cypress verify
+        run: |
+          echo "::set-output name=CYPRESSVERIFY::$(npx cypress verify)"
       - name: Execute Cypress
         uses: cypress-io/github-action@v4
         with: 
