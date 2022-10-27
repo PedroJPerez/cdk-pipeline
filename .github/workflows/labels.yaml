@@ -39,7 +39,7 @@ jobs:
       - name: Echo Contact Card
         run: echo $CONTACT_CARD
       - name: Verify Cypress
-        run: npx cypress verify
+        run: cypress verify
       - name: Execute Cypress
         uses: cypress-io/github-action@v4
         with: 
