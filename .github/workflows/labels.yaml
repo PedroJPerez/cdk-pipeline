@@ -45,6 +45,11 @@ jobs:
           echo ::set-output name=cache::$(npx cypress cache path)
       - name: Cypress Verify Output
         run: echo "The output is ${{ steps.cypress-info.outputs.version }}"
+      - name: Comment Code Coverage
+        uses: mshick/add-pr-comment@v1
+        with:
+          message: ${{ steps.cypress-info.outputs.version }}
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Execute Cypress
         uses: cypress-io/github-action@v4
         with: 
