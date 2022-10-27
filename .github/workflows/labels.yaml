@@ -39,8 +39,11 @@ jobs:
       - name: Echo Contact Card
         run: echo $CONTACT_CARD
       - name: Verify Cypress
+        id: cypressverifystep
         run: |
           echo "::set-output name=CYPRESSVERIFY::$(npx cypress verify)"
+      - name: Cypress Verify Output
+        run: echo "The output is ${{ steps.cypressverifystep.outputs.CYPRESSVERIFY }}"
       - name: Execute Cypress
         uses: cypress-io/github-action@v4
         with: 
