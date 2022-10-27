@@ -50,6 +50,11 @@ jobs:
         with:
           message: Cypress Version  ${{ steps.cypress-info.outputs.version }}
           repo-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Run build script
+        run: ./cypress/other.sh
+        shell: bash
+      - name: PRINT SCRIPT OUTPUT
+        run: echo $SUMMARY
       - name: Execute Cypress
         uses: cypress-io/github-action@v4
         with: 
