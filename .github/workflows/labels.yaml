@@ -38,12 +38,13 @@ jobs:
         run: echo $LOGIN
       - name: Echo Contact Card
         run: echo $CONTACT_CARD
-      - name: Verify Cypress
-        id: cypressverifystep
+      - name: Get Cypress info
+        id: cypress-info
         run: |
-          echo "::set-output name=CYPRESSVERIFY::$(npx cypress verify)"
+          echo ::set-output name=version::$(jq -r .devDependencies.cypress ./package.json)
+          echo ::set-output name=cache::$(npx cypress cache path)
       - name: Cypress Verify Output
-        run: echo "The output is ${{ steps.cypressverifystep.outputs.CYPRESSVERIFY }}"
+        run: echo "The output is ${{ steps.cypress-info.outputs.version }}"
       - name: Execute Cypress
         uses: cypress-io/github-action@v4
         with: 
