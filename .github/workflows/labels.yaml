@@ -51,8 +51,7 @@ jobs:
           message: Cypress Version  ${{ steps.cypress-info.outputs.version }}
           repo-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Run build script
-        run: ./cypress/script.sh
-        shell: bash
+        run: source ./cypress/script.sh
       - name: PRINT SCRIPT OUTPUT
         run: echo $SUMMARY
       - name: Execute Cypress
